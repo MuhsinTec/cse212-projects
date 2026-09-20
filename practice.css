@@ -1,0 +1,6 @@
+Lookup (value= myList[index];) // Lookup looks /searches for a value in the list'Dynamic Array''
+Append (myList.Add(value)) // Append adds a new value to the list at the next available spot
+insert (myList.Insert(index, value)) // Insert adds a value in the middle of the list, 'This will shift the values after this new value to the right'
+remove (myList.Remove(index, value)) // remove a value from the left makes the other values on the right of it to shift to right, whereas deleting at the end doesn`t make it to shift
+Size (myList.Count) // Size returns the number of Items in the lIst
+Capacity (myList.Capacity) // Capacity returns the current storage limit.
