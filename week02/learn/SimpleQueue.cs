@@ -62,12 +62,69 @@
     /// </summary>
     /// <exception cref="IndexOutOfRangeException">If queue is empty</exception>
     /// <returns>First integer in the queue</returns>
-    private int Dequeue() {
+    private int Dequeue()
+    {
+        // Requirement 3: If empty, throw IndexOutOfRangeException
         if (_queue.Count <= 0)
-            throw new IndexOutOfRangeException();
+            throw new IndexOutOfRangeException("Queue is empty.");
 
+        // Requirement 2: Remove and return item from the front (index 0)
         var value = _queue[1];
         _queue.RemoveAt(1);
         return value;
+    }
+    public static void Run()
+    {
+        // Test Cases
+
+        // Test 1
+        // Scenario: Enqueue one value and then Dequeue it.
+        // Expected Result: It should display 100
+        Console.WriteLine("Test 1");
+        var queue = new SimpleQueue();
+        queue.Enqueue(100);
+        var value = queue.Dequeue();
+        Console.WriteLine(value);
+        // Defect(s) Found: Fixed Dequeue to remove from index 0 instead of the back.
+
+        Console.WriteLine("------------");
+
+        // Test 2
+        // Scenario: Enqueue multiple values and then Dequeue all of them
+        // Expected Result: It should display 200, then 300, then 400 in that order
+        Console.WriteLine("Test 2");
+        queue = new SimpleQueue();
+        queue.Enqueue(200);
+        queue.Enqueue(300);
+        queue.Enqueue(400);
+        value = queue.Dequeue();
+        Console.WriteLine(value);
+        value = queue.Dequeue();
+        Console.WriteLine(value);
+        value = queue.Dequeue();
+        Console.WriteLine(value);
+        // Defect(s) Found: Fixed FIFO order by ensuring index 0 is always removed first.
+
+        Console.WriteLine("------------");
+
+        // Test 3
+        // Scenario: Dequeue from an empty Queue
+        // Expected Result: An IndexOutOfRangeException should be raised
+        Console.WriteLine("Test 3");
+        queue = new SimpleQueue();
+        try
+        {
+            queue.Dequeue();
+            Console.WriteLine("Oops ... This shouldn't have worked.");
+        }
+        catch (IndexOutOfRangeException)
+        {
+            Console.WriteLine("I got the expected exception!");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Wrong exception type: {e.GetType().Name}");
+        }
+        // Defect(s) Found: Added explicit check for _queue.Count == 0 to throw IndexOutOfRangeException.
     }
 }

@@ -29,5 +29,29 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // PLAN for RotateListRight:
+        // 1. Calculate the split index where the list needs to be divided.
+        //    The elements to move to the front start at index: data.Count - amount.
+        // 2. Extract the tail portion (the last 'amount' elements) using GetRange.
+        // 3. Remove that tail portion from the original 'data' list using RemoveRange.
+        // 4. Insert the extracted tail portion at the very beginning (index 0) of the 'data' list using InsertRange.
+        // 5. This modifies the list in place without returning a new object.
+
+        if (data == null || data.Count == 0 || amount <= 0)
+        {
+            return;
+        }
+
+        int splitIndex = data.Count - amount;
+
+        // Get the slice of elements that need to move to the front
+        List<int> tailRange = data.GetRange(splitIndex, amount);
+
+        // Remove those elements from the end of the original list
+        data.RemoveRange(splitIndex, amount);
+
+        // Insert the removed elements at the start of the list
+        data.InsertRange(0, tailRange);
     }
 }
